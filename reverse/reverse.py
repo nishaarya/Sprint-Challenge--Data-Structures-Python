@@ -3,7 +3,7 @@ class Node:
         # the value at this linked list node
         self.value = value
         # reference to the next node in the list
-        self.next_node = next_node
+        self.next_node = next_node 
 
     def get_value(self):
         return self.value
@@ -66,5 +66,3 @@ class LinkedList:
             current_node = next_node
         # now set the previous_node back to the head
         self.head = previous_node
-    
-    # completed

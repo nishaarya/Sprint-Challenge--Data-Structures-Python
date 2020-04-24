@@ -5,7 +5,7 @@ class RingBuffer:
     self.storage = [None]*capacity
 
   def append(self, item):
-    self.storage[self.current] = item
+    self.storage[self.current] = item 
 
     # Update current to next value
     if self.current < self.capacity - 1:
