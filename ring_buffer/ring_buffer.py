@@ -1,32 +1,43 @@
-from doubly_linked_list import DoublyLinkedList
-
-
 class RingBuffer:
-    def __init__(self, capacity):
-        self.capacity = capacity
-        self.current = None
-        self.storage = DoublyLinkedList()
+  def __init__(self, capacity):
+    self.capacity = capacity
+    self.current = 0
+    self.storage = [None]*capacity
 
-    def append(self, item):
-        pass
+  def append(self, item):
+    self.storage[self.current] = item
 
-    def get(self):
-        # Note:  This is the only [] allowed
-        list_buffer_contents = []
+    # Update current to next value
+    if self.current < self.capacity - 1:
+      self.current += 1
+    else:
+      # Start back at the beginning
+      self.current = 0
+    
+  def get(self):
+    getList = []
+    for val in self.storage:
+      if val is not None:
+        getList.append(val)
+    return getList
 
-        # TODO: Your code here
 
-        return list_buffer_contents
+buffer = RingBuffer(3)
 
-# ----------------Stretch Goal-------------------
+print(buffer.get())   # should return []
 
+buffer.append('a')
+buffer.append('b')
+buffer.append('c')
 
-class ArrayRingBuffer:
-    def __init__(self, capacity):
-        pass
+print(buffer.get())   # should return ['a', 'b', 'c']
 
-    def append(self, item):
-        pass
+# 'd' overwrites the oldest value in the ring buffer, which is 'a'
+buffer.append('d')
 
-    def get(self):
-        pass
+print(buffer.get())   # should return ['d', 'b', 'c']
+
+buffer.append('e')
+buffer.append('f')
+
+print(buffer.get())   # should return ['d', 'e', 'f']
